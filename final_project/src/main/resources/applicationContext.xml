@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/context
+                  http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                  http://www.springframework.org/schema/aop
+                  http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                  http://www.springframework.org/schema/tx
+                  http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+	<context:component-scan base-package="com.korebap.app.biz" />
+	
+
+    <!--bean을 생성해 의존성 setter 주입한다. 주입하는게 일반 스트링이라서 value를 사용한다.-->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="ds" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/schema" />
+		<property name="username" value="root" />
+		<property name="password" value="password" />
+	</bean>
+	
+	<!--사용할 JdbcTemplate을 생성해주고, dataSource를 참조하여 의존한다.-->
+	<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+		<property name="dataSource" ref="ds" />
+	</bean>
+	
+
+   <!-- 트랜잭션 관리자 추가 -->
+   <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="txManager">
+      <property name="dataSource" ref="ds" />
+   </bean>
+   
+   <tx:advice transaction-manager="txManager" id="txAdvice">
+      <tx:attributes>
+         <tx:method name="insert*" rollback-for="Exception" /> <!-- read-only : 읽기 설정. select류는 읽기만 하라는 설정임 -->
+      </tx:attributes>
+   </tx:advice>
+
+   <!-- 트랜잭션 포인트 컷 -->
+   <aop:config>
+      <aop:pointcut expression="execution(* com.korebap.app.biz..*(..))" id="txPointcut" />      
+      <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+   </aop:config>
+   
+      <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="ds" />
+       <property name="configLocation" value="classpath:sql-map-config.xml" />
+   </bean>
+   <bean id="mybatis" class="org.mybatis.spring.SqlSessionTemplate">
+       <constructor-arg ref="sqlSession" />
+   </bean>
+</beans>
+
+

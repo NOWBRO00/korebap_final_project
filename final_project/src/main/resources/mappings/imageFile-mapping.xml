@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="imageFileDAO">
+	<insert id="insert_BOARD">
+		INSERT INTO IMAGEFILE (FILE_DIR, BOARD_ITEM_NUM)
+		VALUES (#{file_dir}, #{file_board_num})
+	</insert>
+	<insert id="insert_PRODUCT">
+		INSERT INTO IMAGEFILE (FILE_DIR, PRODUCT_ITEM_NUM)
+		VALUES (#{file_dir}, #{file_product_num})
+	</insert>
+	<update id="update"  >
+		UPDATE IMAGEFILE
+		SET FILE_DIR = #{file_dir} WHERE
+		FILE_NUM = #{file_num}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM IMAGEFILE WHERE FILE_NUM = #{file_num}
+	</delete>
+	<select id="selectAll_BOARD" resultType="iamgeFile">
+		SELECT FILE_NUM, FILE_DIR FROM IMAGEFILE WHERE
+		BOARD_ITEM_NUM = #{file_board_num}
+		ORDER BY FILE_NUM
+	</select>
+	<select id="selectAll_PRODUCT" resultType="iamgeFile">
+		SELECT FILE_NUM, FILE_DIR FROM IMAGEFILE WHERE
+		PRODUCT_ITEM_NUM = #{file_product_num}
+		ORDER BY FILE_NUM
+	</select>
+</mapper>
+
