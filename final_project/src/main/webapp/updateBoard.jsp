@@ -112,11 +112,11 @@
                                              <div class="bd-pic">
                                                 <c:choose>
                                                    <c:when test="${fn:startsWith(file.file_dir, 'http')}">
-                                                      <img src="${file.file_dir}" alt="상품 이미지입니다.">
+                                                      <img src="${file.file_dir}" alt="기본 이미지입니다.">
                                                    </c:when>
                                                    <c:otherwise>
-                                                      <img src="img/product/${file.file_dir}"
-                                                         alt="상품설명을 위해 사장님이 넣은 사진파일입니다.">
+                                                      <img src="img/board/${file.file_dir}"
+                                                         alt="게시글 설명을 위해 넣은 사진파일입니다.">
                                                    </c:otherwise>
                                                 </c:choose>
                                              </div>
