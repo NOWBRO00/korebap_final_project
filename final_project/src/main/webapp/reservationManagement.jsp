@@ -23,6 +23,8 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="shortcut icon" href="img/favicon.png" />
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
@@ -73,43 +75,8 @@
 </style>
 </head>
 <body>
-
-	<!-- 헤더 연결 -->
-	<jsp:include page="header.jsp" />
-	<br>
-
-	<!-- 샘플 데이터 설정 -->
-	<%
-	/*
-	List<Map<String, Object>> reservationList = (List<Map<String, Object>>) request.getAttribute("reservationList");
-	if (reservationList == null) {
-		reservationList = new ArrayList<>();
-		Map<String, Object> reservation1 = new HashMap<>();
-		reservation1.put("reservation_product_file_dir", "https://via.placeholder.com/300");
-		reservation1.put("reservation_product_name", "상품 A");
-		reservation1.put("reservation_member_name", "홍길동");
-		reservation1.put("reservation_registration_date", "2024-11-10");
-		reservation1.put("reservation_status", "예약완료");
-		reservation1.put("reservation_num", 101);
-		reservation1.put("reservation_product_num", 1);
-		reservation1.put("currentDate", "2024-10-15");
-
-		Map<String, Object> reservation2 = new HashMap<>();
-		reservation2.put("reservation_product_file_dir", "https://via.placeholder.com/300");
-		reservation2.put("reservation_product_name", "상품 B");
-		reservation2.put("reservation_member_name", "김철수");
-		reservation2.put("reservation_registration_date", "2024-10-01");
-		reservation2.put("reservation_status", "취소됨");
-		reservation2.put("reservation_num", 102);
-		reservation2.put("reservation_product_num", 2);
-		reservation2.put("currentDate", "2024-10-15");
-
-		reservationList.add(reservation1);
-		reservationList.add(reservation2);
-		request.setAttribute("reservationList", reservationList);
-	}
-	*/
-	%>
+ 	<!-- 헤더를 포함하는 부분 -->
+   <c:import url="header.jsp"></c:import>
 
 	<!-- 예약 목록 표시 -->
 	<div class="container text-center">

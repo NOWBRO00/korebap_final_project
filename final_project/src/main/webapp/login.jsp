@@ -10,6 +10,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>로그인 페이지</title>
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 
 </head>
 <body>

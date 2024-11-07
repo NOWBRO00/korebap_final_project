@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고래밥</title>
-
+<link rel="shortcut icon" href="img/favicon.png" />
 
 </head>
 <body>

@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 
 <!-- jQuery 연결 -->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -165,7 +166,7 @@
             <!-- 게시글이 있는 경우 게시글 목록 출력 -->
             <div class="row" id="boardList">
                <c:forEach var="board" items="${boardList}">
-                  <div class="col-md-4">
+                  <div class="col-md">
                      <!-- AJAX로 데이터를 받아서 이곳에 추가 -->
                      <c:if test="${not empty board.board_file_dir}">
                         <c:choose>

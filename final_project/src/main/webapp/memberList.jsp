@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/starPlugin.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 <title>일반 사용자 목록</title>
 
 <!-- jQuery 연결 -->

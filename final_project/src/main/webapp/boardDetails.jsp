@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/starPlugin.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 <style type="text/css">
 
 /* 공통 버튼 스타일 */
@@ -145,7 +146,7 @@ width:500px;
                            <div class="bd-pic">
                               <c:choose>
                                  <c:when test="${fn:startsWith(file.file_dir, 'http')}">
-                                    <img src="${file.file_dir}" alt="상품 이미지입니다.">
+                                    <img src="${file.file_dir}" alt="기본 이미지입니다.">
                                  </c:when>
                                  <c:otherwise>
                                     <img

@@ -9,6 +9,7 @@
 <title>예약 페이지</title>
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 
 <!-- jQuery 사용을 위한 연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"

@@ -15,14 +15,15 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="tn-right">
-						<div class="top-social">
-							<!-- 소셜 미디어 링크 -->
-							<a href="https://koreaisacademy.com/"><i
-								class="fa fa-facebook"></i></a> <a
-								href="https://koreaisacademy.com/"><i class="fa fa-twitter"></i></a>
-							<a href="https://koreaisacademy.com/"><i
-								class="fa fa-instagram"></i></a>
-						</div>
+						<div class="top-social" style="padding:0px; ">
+                           <!-- 소셜 미디어 링크 -->
+                           <a href="https://github.com/jejuorangee/korebap_final_project" >
+                              <img src="img/github-mark.png" style="width:1.5em;" alt="git-hub">
+                           </a> 
+                           <a href="https://daffy-biology-97e.notion.site/Project-345fa4fb32b14ca7b3d67a6d98daa661">
+                              <img src="img/notion-logo-no-background.png" style="width:1.5em;" alt="notion">
+                              </a> 
+                        </div>
 						<!-- 사용자 로그인 태그 -->
 						<mytag:login />
 					</div>

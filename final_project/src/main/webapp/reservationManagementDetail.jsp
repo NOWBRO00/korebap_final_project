@@ -13,6 +13,7 @@
 
 <!-- CSS 및 스타일 -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="shortcut icon" href="img/favicon.png" />
 <style>
 .container {
 	margin-top: 30px;

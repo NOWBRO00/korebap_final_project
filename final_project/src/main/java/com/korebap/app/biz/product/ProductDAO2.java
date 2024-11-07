@@ -473,7 +473,7 @@ public class ProductDAO2 {
 
          // 실제 쿼리 실행
          try {
-            datas = jdbcTemplate.query(sql.toString(), new ProductRowMapper_filter_all(), params.toArray());
+            datas = jdbcTemplate.query(sql.toString(), new ProductRowMapper_all(), params.toArray());
          } catch (Exception e) {
             System.err.println("쿼리 실행 중 오류 발생: " + e.getMessage());
             return null; // 빈 리스트 반환
@@ -510,26 +510,6 @@ class ProductRowMapper_all implements RowMapper<ProductDTO> {
    }
 }
 
-// 필터 검색을 출력하는 RowMapper
-class ProductRowMapper_filter_all implements RowMapper<ProductDTO> {
-
-   @Override
-   public ProductDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-      System.out.println("model.ProductDAO.ProductRowMapper_all 실행");
-
-      ProductDTO data = new ProductDTO();
-      data.setProduct_num(rs.getInt("PRODUCT_NUM")); // 상품 번호
-      data.setProduct_name(rs.getString("PRODUCT_NAME")); // 상품명
-      data.setProduct_price(rs.getInt("PRODUCT_PRICE")); // 상품 가격
-      data.setProduct_address(rs.getString("PRODUCT_ADDRESS")); // 상품 주소
-      data.setProduct_location(rs.getString("PRODUCT_LOCATION")); // 상품 장소 (바다,민물)
-      data.setProduct_category(rs.getString("PRODUCT_CATEGORY")); // 상품 유형 (낚시배, 낚시터,낚시카페, 수상)
-      data.setProduct_file_dir(rs.getString("FILE_DIR")); // 파일 경로
-
-      System.out.println("model.ProductDAO.ProductRowMapper_all 반환");
-      return data;
-   }
-}
 
 // 크롤링을 위한 전체 상품 번호를 반환하는 RowMapper
 class ProductRowMapper_all_crawling implements RowMapper<ProductDTO> {

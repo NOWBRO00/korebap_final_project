@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/starPlugin.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>

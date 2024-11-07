@@ -23,9 +23,9 @@
 <link
    href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap"
    rel="stylesheet">
-<link
-   href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-   rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+   integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+   crossorigin="anonymous"></script>
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -38,6 +38,7 @@
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="shortcut icon" href="img/favicon.png" />
+
 
 <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fecf06794382c055ec106573ef0aa278&libraries=services"></script>

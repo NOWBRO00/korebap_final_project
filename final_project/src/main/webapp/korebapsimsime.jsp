@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="stylesheet" href="css/starPlugin.css" type="text/css">
 <link rel="stylesheet" href="css/kosimeCss.css" type="text/css">
+<link rel="shortcut icon" href="img/favicon.png" />
 <title>고래밥 심심이</title>
 
 </head>

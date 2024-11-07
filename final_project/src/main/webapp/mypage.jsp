@@ -23,6 +23,7 @@
 <script src="js/member/mypageCheckPassword.js"></script>
 <script src="js/member/mypageCheckImage.js"></script>
 <script src="js/member/mypage.js"></script>
+<link rel="shortcut icon" href="img/favicon.png" />
 
 <style type="text/css">
 /* 회원탈퇴, 비밀번호 변경 모달팝업 스타일 */

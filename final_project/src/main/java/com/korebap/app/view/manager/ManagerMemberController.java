@@ -151,7 +151,11 @@ public class ManagerMemberController {
 		memberDTO = memberService.selectOne(memberDTO);
 
 		if(flag) { // 업데이트가 성공적일 경우
-			System.out.println(memberDTO.getMember_role());
+			try {
+			    System.out.println("삭제를 실패했습니다 : [ "+memberDTO.getMember_role()+" ]");
+			} catch (NullPointerException e) {
+			    System.out.println("---------------------멤버 삭제가 완료되었습니다----------------------");
+			}
 			if(memberRole.equals("USER")) {
 				return "redirect:memberListPage.do"; // 결과 반환
 			}
