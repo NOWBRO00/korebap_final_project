@@ -24,7 +24,7 @@ public class BoardInsertTransaction {
 	private ImageFileDAO3 imageFileDAO;
 
 	// 사진 저장될 경로
-	private final static String PATH="D:\\moomoo\\workspace02\\teem_project\\src\\main\\webapp\\img\\board\\";
+	private final static String PATH="PATH";
 
 
 	//@Transactional // 트랜잭션 적용 
@@ -78,8 +78,13 @@ public class BoardInsertTransaction {
 			
 			System.out.println("*****com.korebap.app.biz.board insertBoardAndImg(트랜잭션) files ["+files+"]*****");
 
-
-			if (!files.isEmpty()) { // 파일이 비어있지 않은 경우(데이터가 넘어온 경우)
+			if (files == null || files.isEmpty() || 
+					files.stream().allMatch(MultipartFile::isEmpty)) {
+				// 업로드된 파일이 없을 경우의 처리
+				System.out.println("*****com.korebap.app.biz.board insertBoardAndImg(트랜잭션) 업로드 된 사진 없음*****");
+				return true;
+			}
+			else { // 파일이 비어있지 않은 경우(데이터가 넘어온 경우)
 				// 반복문을 돌려 원본 파일명을 받아온다
 				for(MultipartFile file : files) {
 					originalFilename = file.getOriginalFilename();

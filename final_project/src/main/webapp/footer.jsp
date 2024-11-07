@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고래밥</title>
+<title>Insert title here</title>
 </head>
 <body>
 <!-- Footer Section Begin -->
@@ -19,34 +19,51 @@
                                     <img src="" alt="">
                                 </a>
                             </div>
-                            <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
-                            <div class="fa-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            </div>
+                            <img alt="팀원사진" src="img/KakaoTalk_20241010_100651586.jpg">
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-contact">
-                            <h6>Contact Us</h6>
+                            <h6 style="color:white">이재형</h6>
                             <ul>
-                                <li>(12) 345 67890</li>
-                                <li>info.colorlib@gmail.com</li>
-                                <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                                <li> <img alt="팀원사진" src="img/이재형 노션 QR.png" width="200" height="200"></li>
                             </ul>
                         </div>
+                        <div class="ft-contact">
+                            <h6 style="color:white">김무건</h6>
+                            <ul>
+                                <li> <img alt="팀원사진" src="img/김무건 노션 QR.png" width="200" height="200"></li>
+                            </ul>
+                        </div>
+                        <div class="ft-contact">
+                            <h6 style="color:white">신다솜</h6>
+                            <ul>
+                                <li> <img alt="팀원사진" src="img/신다솜 노션 QR.png" width="200" height="200"></li>
+                            </ul>
+                        </div>
+                        
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-newslatter">
-                            <h6>New latest</h6>
-                            <p>Get the latest updates and offers.</p>
-                            <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
-                                <button type="submit"><i class="fa fa-send"></i></button>
-                            </form>
+                            <div class="ft-contact">
+	                            <h6 style="color:white">장준희</h6>
+	                            <ul>
+	                                <li> <img alt="팀원사진" src="img/장준희 노션 QR.png" width="200" height="200"></li>
+	                            </ul>
+	                        </div>
+	                        <div class="ft-contact">
+	                            <h6 style="color:white">허나윤</h6>
+	                            <ul>
+	                                <li> <img alt="팀원사진" src="img/허나윤 노션 QR.png" width="200" height="200"></li>
+	                            </ul>
+	                        </div>
+	                        	                        <div class="ft-contact">
+                            <h6>PROJECT INTRODUCTION</h6>
+                            <ul>
+                                <li>어디에서든 손쉽게 낚시터를 찾고,</li>
+                                <li>더 나은 경험을 만끽하세요.</li>
+                            </ul>
+                        </div>
                         </div>
                     </div>
                 </div>

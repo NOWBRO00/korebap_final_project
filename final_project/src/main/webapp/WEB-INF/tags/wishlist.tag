@@ -1,7 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ attribute name="wishlist" type="java.lang.Object" %>
 <%@ attribute name="wishlist_page_count" type="java.lang.Integer" %>
 
@@ -11,8 +11,19 @@
     	 <!-- 상품 이미지 -->
         <a href="productDetail.do?meber_id=${member_id}&product_num=${wishlist.wishlist_product_num}">
             <div class="wishlist-image">
-                <img src="${wishlist.wishlist_file_dir}" alt="상품설명을 위해 사장님이 넣은 사진파일입니다.">
-            	<!-- 상품 정보 박스 (사진 위에 표시) -->
+
+				<c:choose>
+					<c:when test="${fn:startsWith(wishlist.wishlist_file_dir, 'http')}">
+						<img src="${wishlist.wishlist_file_dir}" alt="게시글 이미지"
+							class="blog-item set-bg">
+					</c:when>
+					<c:otherwise>
+						<img src="img/product/${wishlist.wishlist_file_dir}" alt="게시글 이미지"
+							class="blog-item set-bg">
+					</c:otherwise>
+				</c:choose>
+
+				<!-- 상품 정보 박스 (사진 위에 표시) -->
 		        <div class="wishlist-info-overlay">
 		            <!-- 상품 장소(바다,민물) -->
 		            <div class="pl-tag">${wishlist.wishlist_product_location}</div>

@@ -35,7 +35,7 @@ public class UpdateBoardController {
 	private ImageFileService imageFileService;
 
 	// 사진 저장될 경로
-	private final static String PATH = "D:\\moomoo\\workspace02\\teem_project\\src\\main\\webapp\\img\\board\\";
+	private final static String PATH = "PATH";
 
 
 	// 게시글 수정 (페이지 이동)

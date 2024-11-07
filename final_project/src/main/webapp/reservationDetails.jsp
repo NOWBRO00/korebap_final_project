@@ -207,7 +207,7 @@ h5 {
                      placeholder="리뷰를 작성해주세요"></textarea>
                   <!-- 글번호 -->
                   <input type="hidden" name="review_product_num"
-                     value="${product.product_num}" />
+                     value="${reservation.reservation_product_num}" />
                   <!-- 제출 버튼 -->
                   <input type="submit" value="리뷰작성" class="btn btn-primary" />
                </form>

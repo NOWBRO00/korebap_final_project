@@ -35,7 +35,7 @@ public class OwnerProductUpdateController {
 	private ImageFileService imageFileService;
 
 	// 사진 저장될 경로
-	private final static String PATH = "D:\\moomoo\\workspace02\\teem_project\\src\\main\\webapp\\img\\product\\";
+	private final static String PATH = "PATH";
 
 
 	// 상품 수정 (페이지 이동)

@@ -1,6 +1,5 @@
 package com.korebap.app.view.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import com.korebap.app.biz.product.ProductDTO;
 import com.korebap.app.biz.product.ProductService;
 import com.korebap.app.biz.reply.ReplyDTO;
 import com.korebap.app.biz.reply.ReplyService;
+import com.korebap.app.view.common.LoginCheck;
 
 @Controller
 public class ManagerMainController {
@@ -32,12 +32,15 @@ public class ManagerMainController {
 
 	@Autowired
 	private BoardService boardService; // BoardService 의존성 주입
-	
+
 	@Autowired
 	private ReplyService replyService; // ReplyService 의존성 주입
 
 	@Autowired
 	private ClaimService claimService; // ClaimService 의존성 주입
+
+	@Autowired
+	private LoginCheck loginCheck; // 로그인 & 권한 확인 의존성 주입
 
 	@RequestMapping(value = "/managerMain.do", method = RequestMethod.GET)
 	public String managerMain(MemberDTO memberDTO, ProductDTO productDTO, BoardDTO boardDTO, ClaimDTO claimDTO,
@@ -45,7 +48,47 @@ public class ManagerMainController {
 		// 메서드 시작 로그 출력
 		System.out.println("************************************************************com.korebap.app.view.manager.ManagerMainController_managerMain_GET 시작************************************************************");
 		System.out.println("관리자 메인페이지로 이동"); // 관리자 메인 페이지로 이동 로그
+		
+		// 로그인, role 체크
+		String member_id = loginCheck.loginCheck();
 
+		// 경로를 저장할 변수 설정
+		String viewName="info";
+
+		//만약 로그인 상태가 아니라면
+		if(member_id.equals("")) {
+
+			System.out.println("*****com.korebap.app.view.owner productDelete 로그인 상태 세션 없음*****");
+
+
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다.");
+			model.addAttribute("path", "login.do");
+
+			// 바로 이동
+			return viewName;
+		}
+
+		System.out.println("*****com.korebap.app.view.owner productDelete 로그인 상태 세션 있음*****");
+
+
+		// role 확인
+		String member_role = loginCheck.loginRoleCheck();
+
+		System.out.println("*****com.korebap.app.view.owner productDelete member_role["+member_role+"]*****");
+
+
+		// role이 OWNER가 아니라면 메인페이지로 이동시킨다.
+		if(!member_role.equals("ADMIN")) {
+
+			System.out.println("*****com.korebap.app.view.owner productDelete role이 OWNER이 아닌 경우*****");
+
+			model.addAttribute("msg", "권한이 없는 아이디입니다.");
+			model.addAttribute("path", "main.do");
+
+			// 바로 이동
+			return viewName;
+
+		}
 		// 전체 회원 수 조회
 		memberDTO.setMember_condition("MEMBER_SELECTONE_COUNT");
 		MemberDTO allMemberData = memberService.selectOne(memberDTO);
@@ -78,17 +121,17 @@ public class ManagerMainController {
 		System.out.println("claimDTO : [ "+claimDTO+" ]");
 		int claimList_total_page = claimDTO.getClaim_total_page();
 
-//		// 전체 상품 수 조회
-//		productDTO.setProduct_condition("PRODUCT_TOTAL_CNT");
-//		List<ProductDTO> productCnt = productService.selectAll(productDTO);
-		
+		//		// 전체 상품 수 조회
+		//		productDTO.setProduct_condition("PRODUCT_TOTAL_CNT");
+		//		List<ProductDTO> productCnt = productService.selectAll(productDTO);
+
 		productDTO.setProduct_condition("PRODUCT_TOTAL_COUNT_VV");
 		productDTO = productService.selectOne(productDTO);
 		int product_total_cnt = productDTO.getProduct_total_cnt();
-		
+
 		productDTO.setProduct_condition("PRODUCT_BY_LOCATION");
 		List<ProductDTO> product_location_by_cnt = productService.selectAll(productDTO);
-		
+
 		productDTO.setProduct_condition("PRODUCT_LOCATION_BY_CATEGORY");
 		List<ProductDTO> product_location_by_category = productService.selectAll(productDTO);
 
@@ -107,7 +150,7 @@ public class ManagerMainController {
 		System.out.println("바다 - 낚시터 상품 수 : [ "+product_location_by_category.get(1).getProduct_location_by_category_cnt()+" ]");
 		System.out.println("민물 - 낚시카페 상품 수 : [ "+product_location_by_category.get(2).getProduct_location_by_category_cnt()+" ]");
 		System.out.println("민물 - 수상 상품 수 : [ "+product_location_by_category.get(3).getProduct_location_by_category_cnt()+" ]");
-		
+
 
 		// 총 페이지 수가 1보다 작으면 1로 설정
 		if(claimList_total_page < 1) {
@@ -123,7 +166,7 @@ public class ManagerMainController {
 		model.addAttribute("claimList", claimList);
 		model.addAttribute("claimList_total_page", claimList_total_page); // 총 페이지 수
 		model.addAttribute("currentPage", claimList_page_num); // 현재 페이지 번호
-		
+
 		model.addAttribute("product_total_cnt", product_total_cnt);
 		model.addAttribute("ocean_cnt", product_location_by_cnt.get(0).getProduct_location_by_cnt());
 		model.addAttribute("freshwater", product_location_by_cnt.get(1).getProduct_location_by_cnt());
@@ -137,31 +180,70 @@ public class ManagerMainController {
 		// 뷰 이름 반환
 		return "managerMain";
 	}
-	
+
 	@RequestMapping(value="selectReply.do", method=RequestMethod.GET)
 	public String selectReply(ReplyDTO replyDTO, BoardDTO boardDTO, Model model) {
 		System.out.println("************************************************************com.korebap.app.view.manager.ManagerMainController_selectReply_GET 시작************************************************************");
-		
+		// 로그인, role 체크
+		String member_id = loginCheck.loginCheck();
+
+		// 경로를 저장할 변수 설정
+		String viewName="info";
+
+		//만약 로그인 상태가 아니라면
+		if(member_id.equals("")) {
+
+			System.out.println("*****com.korebap.app.view.owner productDelete 로그인 상태 세션 없음*****");
+
+
+			model.addAttribute("msg", "로그인이 필요한 서비스입니다.");
+			model.addAttribute("path", "login.do");
+
+			// 바로 이동
+			return viewName;
+		}
+
+		System.out.println("*****com.korebap.app.view.owner productDelete 로그인 상태 세션 있음*****");
+
+
+		// role 확인
+		String member_role = loginCheck.loginRoleCheck();
+
+		System.out.println("*****com.korebap.app.view.owner productDelete member_role["+member_role+"]*****");
+
+
+		// role이 OWNER가 아니라면 메인페이지로 이동시킨다.
+		if(!member_role.equals("ADMIN")) {
+
+			System.out.println("*****com.korebap.app.view.owner productDelete role이 OWNER이 아닌 경우*****");
+
+			model.addAttribute("msg", "권한이 없는 아이디입니다.");
+			model.addAttribute("path", "main.do");
+
+			// 바로 이동
+			return viewName;
+
+		}
 		//int replyNum = replyDTO.getReply_num();
 		System.out.println("댓글 번호 : [ "+replyDTO.getReply_num()+" ]");
 		replyDTO = replyService.selectOne(replyDTO);
 		int baordNum = replyDTO.getReply_board_num();
 		System.out.println("게시글 번호 : [ "+baordNum+" ]");
-		
+
 		//boardDTO.setBoard_num(2);
 		boardDTO.setBoard_num(baordNum);
 		boardDTO.setBoard_condition("BOARD_SELECT_ONE");
 		boardDTO = boardService.selectOne(boardDTO);
-		
+
 		replyDTO.setReply_board_num(2);
 		List<ReplyDTO> replyList = replyService.selectAll(replyDTO);
 		System.out.println(replyList);
 		model.addAttribute("board",boardDTO);
 		model.addAttribute("replyList",replyList);
-		
-		
+
+
 		System.out.println("************************************************************com.korebap.app.view.manager.ManagerMainController_selectReply_GET 종료************************************************************");
 		return "boardDetails";
 	}
-	
+
 }
