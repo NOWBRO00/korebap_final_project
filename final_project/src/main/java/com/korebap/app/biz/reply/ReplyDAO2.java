@@ -35,6 +35,9 @@ public class ReplyDAO2 {
 			+ "WHERE B.BOARD_NUM = ? " 
 			+ "ORDER BY R.REPLY_NUM DESC";
 	
+	// 특정 게시글의 댓글 조회
+	private final String REPLY_SELECT_ONE="SELECT REPLY_BOARD_NUM FROM REPLY WHERE REPLY_NUM = ?";
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
@@ -103,9 +106,11 @@ public class ReplyDAO2 {
 		return datas;
 	}
 
-	public ReplyDTO selectOne(ReplyDTO replyDTO){
-		// 미사용으로 null 반환한다.
-		return null;
+	public ReplyDTO selectOne(ReplyDTO replyDTO){// 힌개 출력
+		ReplyDTO data=null;
+		Object[] args = {replyDTO.getReply_num()};
+		data=jdbcTemplate.queryForObject(REPLY_SELECT_ONE,args,new ReplyRowMapper_selectOne());
+		return data;
 	}
 }
 
@@ -131,6 +136,23 @@ class ReplyRowMapper implements RowMapper<ReplyDTO>{
 			e.printStackTrace();
 		}
 		System.out.println("====model.ReplyDAO2.ReplyRowMapper 종료");
+		return data;
+	}
+}
+
+class ReplyRowMapper_selectOne implements RowMapper<ReplyDTO>{
+	
+	@Override
+	public ReplyDTO mapRow(ResultSet rs, int rowNum){
+		System.err.println("====model.ReplyDAO2.ReplyRowMapper 시작");
+		ReplyDTO data = new ReplyDTO();
+		try {
+			data.setReply_board_num(rs.getInt("REPLY_BOARD_NUM"));
+		} 
+		catch (SQLException e) {
+			System.err.println("====model.ReplyDAO2.ReplyRowMapper 실패");
+			e.printStackTrace();
+		}
 		return data;
 	}
 }

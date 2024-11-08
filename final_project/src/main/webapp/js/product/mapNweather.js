@@ -17,6 +17,8 @@ $(document).ready(function(){
 	var geocoder = new kakao.maps.services.Geocoder();
 	var address = $('#product_address').val();
 	var product_name = $('#product_name').text();
+	product_name=product_name.slice(0, product_name.indexOf(' ')); // 마커 이슈
+	
 	//var product_data={address:'${product.product_address}'};
 	var resultR = null;
 	// 주소로 좌표를 검색합니다
@@ -61,7 +63,7 @@ $(document).ready(function(){
 	    
 	  //날씨 api를 통해 날씨에 관련된 정보들을 받아온다. 
     function getWeather(lat, lon) {
-    	const API_KEY = "API_KEY";
+    	const API_KEY = "ffd7a00bf82dc39075ee0b14f3d23d7d";
     	const url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+API_KEY+"&units=metric&lang=kr";
         fetch(url).then(function(response) {
 			console.log(response);

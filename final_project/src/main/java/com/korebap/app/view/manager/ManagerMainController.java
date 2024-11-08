@@ -235,7 +235,7 @@ public class ManagerMainController {
 		boardDTO.setBoard_condition("BOARD_SELECT_ONE");
 		boardDTO = boardService.selectOne(boardDTO);
 
-		replyDTO.setReply_board_num(2);
+		replyDTO.setReply_board_num(boardDTO.getBoard_num());
 		List<ReplyDTO> replyList = replyService.selectAll(replyDTO);
 		System.out.println(replyList);
 		model.addAttribute("board",boardDTO);

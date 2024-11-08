@@ -234,7 +234,7 @@ width:500px;
                                  <img src="img/profile/${reply.reply_member_profile}"
                                     alt="댓글 작성자 프로필 이미지">
                               </div>
-                              <div class="sc-text">
+                              <div class="sc-text" id="${reply.reply_num}">
                                  <input type="text" id="replyNum" value="${reply.reply_num}" style="display:none;"/>
                                  <!-- 댓글 작성일자 -->
                                  <input type="text" value="${reply.reply_registration_date}" readonly/>
@@ -288,7 +288,7 @@ width:500px;
                               <!-- 댓글 내용 입력 -->
                               <textarea name="reply_content" placeholder="댓글 내용"></textarea>
                               <!-- 댓글 작성 버튼 -->
-                              <button type="submit" class="site-btn">댓글 작성</button>
+                              <button type="submit" class="likeButton">댓글 작성</button>
                            </div>
                         </div>
                      </form>
@@ -314,6 +314,7 @@ width:500px;
    <script src="js/jquery.slicknav.js"></script>
    <script src="js/owl.carousel.min.js"></script>
    <script src="js/main.js"></script>
+   <script src="js/board/replyFocus.js"></script>
 
    <!-- 추가 Js 플러그인 -->
    <script src="js/board/like.js"></script>
