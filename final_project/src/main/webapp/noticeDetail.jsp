@@ -65,7 +65,7 @@
                     <div class="tag-share">
                         <div class="tags">
                             <div class="button-container">
-                                <c:if test="${member_id eq notice.board_writer_id}">
+                                <c:if test="${member_id eq notice.board_writer_id or member_role=='ADMIN'}">
                                     <button class="editButton" onclick="location.href='updateNotice.do?board_num=${notice.board_num}';">✏️수정</button>
                                     <button class="editButton" onclick="if(confirm('정말 삭제하시겠습니까?')) location.href='deleteNotice.do?board_num=${notice.board_num}';">❌삭제</button>
                                 </c:if>

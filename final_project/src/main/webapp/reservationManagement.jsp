@@ -89,10 +89,6 @@
 				<c:forEach var="reservation" items="${reservationList}">
 					<div class="col-md-6">
 						<div class="card">
-							<!-- 상품 이미지 -->
-							<img src="${reservation.reservation_product_file_dir}"
-								class="rounded mx-auto d-block" alt="상품 사진">
-
 							<!-- 예약 상세 정보 -->
 							<div class="card-body">
 								<h3>

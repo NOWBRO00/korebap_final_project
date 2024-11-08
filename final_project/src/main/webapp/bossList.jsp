@@ -68,7 +68,7 @@
 										<table class="table table-striped table-bordered table-hover"
 											id="dataTables-example">
 											<thead>
-												<tr>
+												<tr style="text-align: center;">
 													<th>ID</th>
 													<th>이름</th>
 													<th>전화번호</th>
@@ -83,27 +83,6 @@
 														<td colspan=5>사장님 사용자가 없습니다.</td>
 													</tr>
 												</c:if>
-												<c:forEach var="boss" items="${bossList}">
-													<a href="mypage.do?member_id=${boss.member_id}">
-														<tr>
-															<td>${boss.member_id}</td>
-															<td>${boss.member_name}</td>
-															<td>${boss.member_phone}</td>
-															<td>${boss.member_registration_date}</td>
-															<td>
-																<div class="d-flex justify-content-between">
-																	<a href="MemberBan.do?member_id=${boss.member_id}"
-																		class="btn btn-primary disabled" role="button"
-																		aria-disabled="true">정지</a> 
-																		<a
-																		href="deleteMember.do?member_id=${boss.member_id}"
-																		class="btn btn-primary disabled" role="button"
-																		aria-disabled="true">탈퇴</a>
-																</div>
-															</td>
-														</tr>
-													</a>
-												</c:forEach>
 												<!-- 실 데이터 반복 -->
 											</tbody>
 										</table>

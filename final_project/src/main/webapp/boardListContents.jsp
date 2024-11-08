@@ -11,23 +11,23 @@
 
 </head>
 <body>
-	<p> 총 페이지 수 : <c:out value="${totalPage}" /></p>
+<!--	<p> 총 페이지 수 : <c:out value="${totalPage}" /></p>
 	<p> 현재 페이지 수 : <c:out value="${currentPage}" /></p>
 	
-<!-- 게시글이 없는 경우 메시지 출력 -->
+ 게시글이 없는 경우 메시지 출력 -->
 
 	<!-- 게시판 목록 섹션 시작 -->
-	<!-- 게시판 목록이 비어있지 않다면 -->
+	<!-- 게시판 목록이 비어있지 않다면 
 							<c:if test="${empty boardList}">
 					<div class="empty-boardList">
 						<p>게시글이 없습니다.</p>
 						<a href="main.do" class="btn-primary">메인으로 돌아가기</a>
 					</div>
-				</c:if>
+				</c:if>-->
 
-				<!-- 게시글이 있는 경우 게시글 목록 출력 -->
-				<div class="row" id="boardList"> <!-- AJAX로 데이터를 받아서 이곳에 추가 -->
-					<c:if test="${not empty boardList}">
+				<!-- 게시글이 있는 경우 게시글 목록 출력 
+				<div class="row" id="boardList">  AJAX로 데이터를 받아서 이곳에 추가 -->
+		<!--			<c:if test="${not empty boardList}">
 						<c:forEach var="board" items="${boardList}">
 							<div class="col-md-4">
 								<div class="blog-item scroll_counter">
@@ -60,11 +60,7 @@
 				
 <input type="hidden" id="totalPage" data-board-total-page="${totalPage}">
 <input type="hidden" id="currentPage" data-board-current-Page="${currentPage}">
-
-<% 
-//System.out.println("JSP에서 totalPage 값: " + request.getAttribute("totalPage"));
-%>
-
+ -->
 
 <script type="text/javascript">
 

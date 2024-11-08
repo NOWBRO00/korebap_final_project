@@ -104,22 +104,6 @@
 </style>
 </head>
 <body>
-	<!-- 샘플 데이터 설정 
-   <%
-//   Map<String, Object> product = new HashMap<>();
-//   product.put("product_name", "샘플 상품");
-/*
-   product.put("product_num", 101);
-   product.put("product_price", 10000);
-   product.put("product_details", "이것은 샘플 상품 설명입니다.");
-   product.put("product_cnt", 5);
-   product.put("product_location", "민물");
-   product.put("product_category", "낚시배");
-   product.put("product_address", "서울시 강동구 강변로 123");
-
-   request.setAttribute("product", product);
-   */
-%> -->
 
 	<div class="container">
 		<!-- 헤더 섹션 -->

@@ -40,11 +40,11 @@ $(document).ready(function() {
 		                console.log("forEach 시작: ", claim);
 		                claimHTML += 						`
 						                    <tr>
-						                        <td>${claim.claim_num}</td>
-						                        <td>${claim.claim_reporter_id}</td>
+						                        <td style="vertical-align: middle;">${claim.claim_num}</td>
+						                        <td style="vertical-align: middle;">${claim.claim_reporter_id}</td>
 						                        
 						                        ${claim.claim_board_num || claim.claim_reply_num ? `
-						                            <td>
+						                            <td style="vertical-align: middle;">
 						                                ${claim.claim_board_num ? `
 						                                    <a href="boardDetail.do?board_num=${claim.claim_board_num}">게시글 ${claim.claim_board_num}</a>
 						                                ` : ''}
@@ -54,10 +54,10 @@ $(document).ready(function() {
 						                            </td>
 						                        ` : ''}
 						                        
-						                        <td class="center">${claim.claim_target_member_id}</td>
-						                        <td class="center">
-						                            <div class="d-flex justify-content-between">
-						                                <button onclick="location.href='accessClaim.do?claim_num=${claim.claim_num}'" class="accessButton" id="accessButton" value="${claim.claim_num}">승인</button>
+						                        <td style="vertical-align: middle;" class="center">${claim.claim_target_member_id}</td>
+						                        <td style="vertical-align: middle;" class="center">
+						                            <div>
+						                                <button style="margin-right: 2rem;" onclick="location.href='accessClaim.do?claim_num=${claim.claim_num}'" class="accessButton" id="accessButton" value="${claim.claim_num}">승인</button>
 						                                <button onclick="location.href='returnClaim.do?claim_num=${claim.claim_num}'" class="returnButton" id="returnButton" value="${claim.claim_num}">반려</button>
 						                            </div>
 						                        </td>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     console.log("문서 로드 완료");
-	
+   
     var totalPage = $('#product_total_page').data('product_page_count'); // 전체 페이지 수
     var productTaypes = $('#productTypes').data('product_types');
     var productCategories = $('#productCategories').data('product_categories');
@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     // 상품 로드 함수
     function loadProducts(currentPage, searchOption) {
-		var searchKeyword = $('#product_searchKeyword').val(); 
+      var searchKeyword = $('#product_searchKeyword').val(); 
         var productLocation = $('#product_location').val();
         var productCategory = $('#product_category').val();
 
@@ -67,8 +67,8 @@ $(document).ready(function() {
                     const imgSrc = (product.product_file_dir && product.product_file_dir.startsWith("http")) 
                         ? product.product_file_dir  // 이미 http로 시작하는 절대경로일 경우 그대로 사용
                         : (product.product_file_dir && product.product_file_dir !== "null" && product.product_file_dir !== "") 
-                            ? "http://localhost:8088/teem_project/img/product/" + product.product_file_dir  // 상대경로인 경우 절대경로로 변환
-                            : 'http://localhost:8088/teem_project/img/board/boardBasic.png';  // null 또는 빈 값일 경우 기본 이미지
+                            ? "img/product/" + product.product_file_dir  
+                            : 'img/board/boardBasic.png';  // null 또는 빈 값일 경우 기본 이미지
 
                     productHTML += `
                         <div class="col-md-4">
@@ -95,8 +95,8 @@ $(document).ready(function() {
                             const imgSrc = (product.product_file_dir && product.product_file_dir.startsWith("http"))
                                 ? product.product_file_dir
                                 : (product.product_file_dir && product.product_file_dir !== "null" && product.product_file_dir !== "") 
-                                    ? "http://localhost:8088/teem_project/img/product/" + product.product_file_dir
-                                    : 'http://localhost:8088/teem_project/img/board/boardBasic.png';
+                                    ? "img/product/" + product.product_file_dir
+                                    : 'img/board/boardBasic.png';
                             productHTML += `
                                 <div class="col-md-4">
                                     <img alt="상품사진" class="blog-item set-bg" src="${imgSrc}">
@@ -117,7 +117,7 @@ $(document).ready(function() {
             }
         });
     }
-	
+   
     // 페이지 버튼 상태 업데이트 함수
     function updatePagination(currentPage, totalPages) {
         var paginationHtml = '';

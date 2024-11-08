@@ -266,7 +266,7 @@
                      <button type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">취소</button>
                      <button type="button" class="btn btn-primary"
-                        onclick="()">검색</button>
+                        onclick="submitSearch()">검색</button>
                   </div>
                </div>
             </div>

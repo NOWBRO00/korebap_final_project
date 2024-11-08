@@ -181,7 +181,7 @@
 									<c:otherwise>
 										<!-- 절대경로로 변경 -->
 										<img
-											src="http://localhost:8088/teem_project/img/product/${product.product_file_dir}"
+											src="img/product/${product.product_file_dir}"
 											alt="상품 이미지" class="blog-item set-bg">
 									</c:otherwise>
 								</c:choose>

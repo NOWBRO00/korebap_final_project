@@ -221,7 +221,7 @@
 									<table class="table table-striped table-bordered table-hover"
 										id="dataTables-example">
 										<thead>
-											<tr>
+											<tr style="text-align: center;">
 												<th>신고 번호</th>
 												<th>신고한 아이디</th>
 												<th>신고 컨텐츠</th>
@@ -229,7 +229,7 @@
 												<th>승인 / 반려</th>
 											</tr>
 										</thead>
-										<tbody class="claimList">
+										<tbody class="claimList" style="text-align: center;">
 											<c:if test="${empty claimList}">
 												<tr>
 													<td colspan=5>처리되지 않은 신고가 없습니다.</td>

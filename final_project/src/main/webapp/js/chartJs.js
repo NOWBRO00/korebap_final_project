@@ -32,16 +32,16 @@ $(document).ready(function(){
 	var donutChart = new Chart(ctx, {
 		type : 'doughnut',
 		data : {
-			labels : [ '바다 - 총 상품', '바다 - 낚시배', '바다 - 낚시터', '민물 - 총 상품',
-					'민물 - 낚시터', '민물 - 낚시카페' ],
+			labels : [ '바다 - 총 상품','민물 - 총 상품', '민물 - 낚시카페', 
+					'민물 - 낚시터',  '바다 - 낚시배', '바다 - 낚시터' ],
 			datasets : [ {
 				label : '카테고리 별 상품 수',
 				data : [ totalSeaProducts, // 바다 - 총 상품
-				seaFishingBoat, // 바다 - 낚시배
-				seaFishingSpot, // 바다 - 낚시터
 				totalFreshwaterProducts, // 민물 - 총 상품
+				freshwaterFishingCafe, // 민물 - 낚시카페
 				freshwaterFishingSpot, // 민물 - 낚시터
-				freshwaterFishingCafe // 민물 - 낚시카페
+				seaFishingBoat, // 바다 - 낚시배
+				seaFishingSpot // 바다 - 낚시터
 				],
 				backgroundColor : [ '#FF6384', // 바다 - 총 상품 색상
 				'#36A2EB', // 바다 - 낚시배 색상
@@ -93,7 +93,7 @@ $(document).ready(function(){
 		data : {
 			labels : [ '사장님 사용자', '전체 사용자 비율' ],
 			datasets : [ {
-				label : '사장님 사용자',
+				label : '사용자',
 				data : [ bossTotal, userBossTotal - bossTotal ], // 사용자와 사장님 합에서 사장님 데이터
 				backgroundColor : [ '#FFCE56', '#E0E0E0' ],
 				hoverBackgroundColor : [ '#FFCE56', '#E0E0E0' ]
@@ -107,7 +107,7 @@ $(document).ready(function(){
 		data : {
 			labels : [ '상품', '다른 컨텐츠' ],
 			datasets : [ {
-				label : '상품',
+				label : '컨텐츠',
 				data : [ productTotal, productBoardTotal - productTotal ], // 상품과 게시판 합에서 상품 데이터
 				backgroundColor : [ '#36A2EB', '#E0E0E0' ],
 				hoverBackgroundColor : [ '#36A2EB', '#E0E0E0' ]
@@ -121,7 +121,7 @@ $(document).ready(function(){
 		data : {
 			labels : [ '게시판', '다른 컨텐츠' ],
 			datasets : [ {
-				label : '게시판',
+				label : '컨텐츠',
 				data : [ boardTotal, productBoardTotal - boardTotal ], // 상품과 게시판 합에서 게시판 데이터
 				backgroundColor : [ '#4BC0C0', '#E0E0E0' ],
 				hoverBackgroundColor : [ '#4BC0C0', '#E0E0E0' ]

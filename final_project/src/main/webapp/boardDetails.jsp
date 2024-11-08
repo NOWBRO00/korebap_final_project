@@ -150,7 +150,7 @@ width:500px;
                                  </c:when>
                                  <c:otherwise>
                                     <img
-                                       src="http://localhost:8088/teem_project/img/board/${file.file_dir}"
+                                       src="img/board/${file.file_dir}"
                                        alt="게시글에서 사용자가 입력한 사진파일입니다.">
                                  </c:otherwise>
                               </c:choose>

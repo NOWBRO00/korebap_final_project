@@ -50,14 +50,14 @@ $(document).ready(function() {
 	            } else {
 	                memberList.forEach((member) => {
 	                    console.log("forEach 시작: ", member);
-	                    memberHTML += '<tr>' +
-	                        '<td><a href="mypage.do?member_id=' + member.member_id + '">' + member.member_id + '</a></td>' +
-	                        '<td>' + member.member_name + '</td>' +
-	                        '<td>' + member.member_phone + '</td>' +
-	                        '<td>' + member.member_registration_date + '</td>' +
-	                        '<td>' +
-	                        '<div class="d-flex justify-content-between">' +
-	                        '<a href="MemberBan.do?member_id=' + member.member_id + '" class="btn btn-primary" role="button">정지</a>' +
+	                    memberHTML += '<tr style="text-align: center;">' +
+	                        '<td style="vertical-align: middle;"><a href="mypage.do?member_id=' + member.member_id + '">' + member.member_id + '</a></td>' +
+	                        '<td style="vertical-align: middle;">' + member.member_name + '</td>' +
+	                        '<td style="vertical-align: middle;">' + member.member_phone + '</td>' +
+	                        '<td style="vertical-align: middle;">' + member.member_registration_date + '</td>' +
+	                        '<td style="vertical-align: middle;">' +
+	                        '<div>' +
+	                        '<a style="margin-right: 2rem;" href="MemberBan.do?member_id=' + member.member_id + '" class="btn btn-primary" role="button">정지</a>' +
 	                        '<a href="deleteMember.do?member_id=' + member.member_id + '" class="btn btn-primary" role="button">탈퇴</a>' +
 	                        '</div>' +
 	                        '</td>' +

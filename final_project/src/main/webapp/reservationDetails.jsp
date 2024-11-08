@@ -85,7 +85,7 @@ h5 {
    <jsp:include page="header.jsp" />
    <br>
    <!-- 예약 내역 상세보기 -->
-   <div class="container text-center">
+   <div class="container">
       <div class="row">
          <div class="card">
             <br>
@@ -98,11 +98,12 @@ h5 {
                   <div class="card-body">
                      <!-- 상품 썸네일 -->
                      <img
-                        src="http://localhost:8088/teem_project/img/product/${reservation.reservation_product_file_dir}"
-                        class="rounded mx-auto d-block" alt="상품 사진"
+                        src="img/product/${reservation.reservation_product_file_dir}"
+                        class="rounded mx-auto d-block" alt="상품 이미지"
                         style="margin-left: 10px;"> <br>
                   </div>
                </div>
+               
                <div class="col-md-8" style="width: 100rem;">
                   <div class="card-body">
                      <!-- 상품명, 예약상태, 결제상태 -->

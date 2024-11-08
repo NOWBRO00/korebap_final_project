@@ -13,90 +13,96 @@
 
 <!-- CSS 및 스타일 -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css" type="text/css">
 <link rel="shortcut icon" href="img/favicon.png" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
-.container {
-	margin-top: 30px;
+input {
+	border: none !important;
 }
 
-.product-img {
-	max-width: 100%;
-	height: auto;
-	margin-bottom: 20px;
-}
-
-.details {
-	text-align: left;
-}
-
-.details h3 {
-	margin-bottom: 20px;
-}
-
-.details p {
-	margin: 5px 0;
-}
-
-.btn {
-	margin-top: 20px;
+h5 {
+	width: 120px;
+	align-content: center !important;
 }
 </style>
 </head>
 <body>
 
-	<%
-	/*
-	// 샘플 데이터 설정
-	Map<String, Object> reservation = new HashMap<>();
-	reservation.put("reservation_product_file_dir", "https://via.placeholder.com/400");
-	reservation.put("reservation_product_name", "상품 A");
-	reservation.put("reservation_member_name", "홍길동");
-	reservation.put("reservation_member_phone", "010-1234-5678");
-	reservation.put("reservation_registration_date", "2024-11-10");
-	reservation.put("booking_price", 30000);
-	reservation.put("reservation_status", "예약완료");
-	reservation.put("reservation_num", 101);
-	request.setAttribute("reservation", reservation);
-	*/
-	%>
-
 	<!-- 헤더 연결 -->
 	<jsp:include page="header.jsp" />
 	<br>
 	<div class="container">
-		<h2>예약 상세보기</h2>
-		<hr>
-
 		<div class="row">
-			<div class="col-md-6">
-				<!-- 상품 이미지 -->
-				<img src="${reservation.product_file_dir}" alt="상품 이미지"
-					class="product-img img-thumbnail">
-			</div>
+			<div class="card">
+				<br>
 
-			<div class="col-md-6 details">
-				<!-- 상품 정보 및 예약 정보 -->
-				<h3>${reservation.reservation_product_name}</h3>
-				<p>예약자: ${reservation.reservation_member_name}</p>
-				<p>예약자 연락처: ${reservation.reservation_member_phone}</p>
-				<p>예약 날짜: ${reservation.reservation_registration_date}</p>
-				<p>가격: ${reservation.booking_price}원</p>
-				<p>예약 상태: ${reservation.reservation_status}</p>
+				<h2>예약 상세보기</h2>
 
-				<!-- 예약 취소 버튼 -->
-				<c:if test="${reservation.reservation_status == '예약완료'}">
-					<form action="ownerReservationCancle.do" method="POST">
-						<input type="hidden" name="reservation_num"
-							value="${reservation.reservation_num}">
-						<button type="submit" class="btn btn-danger"
-							onclick="return confirm('예약을 취소하시겠습니까?');">예약 취소</button>
-					</form>
-				</c:if>
+				<hr>
+				<div class="row g-0">
+					<div class="col-md-4" style="width: 50rem;">
+						<div class="card-body">
+							<!-- 상품 이미지 -->
+							<img
+								src="img/product/${reservation.reservation_product_file_dir}"
+								alt="상품 이미지" class="rounded mx-auto d-block"
+								style="margin-left: 10px;">
+						</div>
+					</div>
 
-				<!-- 뒤로가기 버튼 -->
-				<a href="ownerReservationList.do" class="btn btn-outline-secondary">뒤로가기</a>
+					<div class="col-md-8" style="width: 100rem;">
+						<div class="card-body">
+							<!-- 상품 정보 및 예약 정보 -->
+							<div class="input-group mb-3"
+								style="display: flex; align-items: flex-end; height: 40px;">
+								<h3>${reservation.reservation_product_name}</h3>
+								<div class="bd-hero-text" style="margin-right: 3px;">
+									<span>${reservation.reservation_status}</span>
+								</div>
+							</div>
+						</div>
+						<div class="input-group mb-3">
+							<h5>예약자명</h5>
+							<input type="text" class="form-control"
+								value="${reservation.reservation_member_name}" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<h5>전화번호</h5>
+							<input type="text" class="form-control"
+								value="${reservation.reservation_member_phone}" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<h5>사용 예정일</h5>
+							<input type="text" class="form-control"
+								value="${reservation.reservation_registration_date}" readonly>
+						</div>
+						<div class="input-group mb-3">
+							<h5>결제금액</h5>
+							<input type="text" class="form-control"
+								value="${reservation.reservation_price}" readonly>
+						</div>
+
+						<!-- 예약 취소 버튼 -->
+						<c:if test="${reservation.reservation_status == '예약완료'}">
+							<form action="ownerReservationCancle.do" method="POST">
+								<input type="hidden" name="reservation_num"
+									value="${reservation.reservation_num}">
+								<button type="submit" class="btn btn-outline-secondary" style="width: 140px"
+									onclick="return confirm('예약을 취소하시겠습니까?');">예약 취소</button>
+							</form>
+						</c:if>
+
+						<!-- 뒤로가기 버튼 -->
+						<a href="ownerReservationList.do"
+							class="btn btn-outline-secondary">뒤로가기</a>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<br>
 	<br>

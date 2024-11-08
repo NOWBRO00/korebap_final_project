@@ -27,8 +27,8 @@ public class ReservationDAO2 {
 	private final String RESERVATION_OWNER_SELECTALL = "SELECT R.RESERVATION_NUM, R.RESERVATION_REGISTRATION_DATE, R.RESERVATION_STATUS, "
 			+ "COALESCE(PR.PRODUCT_NUM, 0) AS PRODUCT_NUM, "
 			+ "COALESCE(PR.PRODUCT_NAME, '존재하지 않는 상품입니다.') AS PRODUCT_NAME, "
-			+ "P.PAYMENT_PRICE, M.MEMBER_ID AS BUYER_ID, " 
-			+ "M.MEMBER_NAME AS BUYER_NAME, M.MEMBER_PHONE AS BUYER_PHONE "
+			+ "P.PAYMENT_PRICE, M.MEMBER_ID , " 
+			+ "M.MEMBER_NAME , M.MEMBER_PHONE  "
 			+ "FROM RESERVATION R "
 			+ "JOIN PAYMENT P ON R.RESERVATION_PAYMENT_NUM = P.PAYMENT_NUM "
 			+ "JOIN PRODUCT PR ON P.PAYMENT_PRODUCT_NUM = PR.PRODUCT_NUM "
@@ -68,16 +68,19 @@ public class ReservationDAO2 {
 			+ "WHERE R.RESERVATION_NUM = ?";
 
 	// 사장님 ID, 예약번호로 상세예약건 보기
-	private final String RESERVATION_OWNER_SELECTONE = "SELECT R.RESERVATION_NUM, R.RESERVATION_REGISTRATION_DATE, R.RESERVATION_STATUS, "
-			+ "COALESCE(PR.PRODUCT_NUM, 0) AS PRODUCT_NUM, " 
-			+ "COALESCE(PR.PRODUCT_NAME, '존재하지 않는 상품입니다.') AS PRODUCT_NAME, "
-			+ "P.PAYMENT_PRICE, P.PAYMENT_REGISTRATION_DATE, P.PAYMENT_METHOD, P.PAYMENT_STATUS, "
-			+ "M.MEMBER_ID, M.MEMBER_NAME, "
-			+ "M.MEMBER_PHONE " 
-			+ "FROM RESERVATION R " 
-			+ "JOIN PAYMENT P ON R.RESERVATION_PAYMENT_NUM = P.PAYMENT_NUM "
-			+ "JOIN PRODUCT PR ON P.PAYMENT_PRODUCT_NUM = PR.PRODUCT_NUM "
-			+ "JOIN MEMBER M ON P.PAYMENT_MEMBER_ID = M.MEMBER_ID " 
+	private final String RESERVATION_OWNER_SELECTONE = "SELECT R.RESERVATION_NUM, R.RESERVATION_REGISTRATION_DATE, R.RESERVATION_STATUS, \r\n"
+			+ "COALESCE(PR.PRODUCT_NUM, 0) AS PRODUCT_NUM, \r\n"
+			+ "COALESCE(PR.PRODUCT_NAME, '존재하지 않는 상품입니다.') AS PRODUCT_NAME, \r\n"
+			+ "P.PAYMENT_PRICE, P.PAYMENT_REGISTRATION_DATE, P.PAYMENT_METHOD, P.PAYMENT_STATUS, \r\n"
+			+ "M.MEMBER_ID, M.MEMBER_NAME, \r\n"
+			+ "M.MEMBER_PHONE,\r\n"
+			+ "I.FILE_DIR \r\n"
+			+ "FROM RESERVATION R \r\n"
+			+ "JOIN PAYMENT P ON R.RESERVATION_PAYMENT_NUM = P.PAYMENT_NUM \r\n"
+			+ "JOIN PRODUCT PR ON P.PAYMENT_PRODUCT_NUM = PR.PRODUCT_NUM \r\n"
+			+ "JOIN MEMBER M ON P.PAYMENT_MEMBER_ID = M.MEMBER_ID \r\n"
+			+ "LEFT JOIN (SELECT FILE_DIR,PRODUCT_ITEM_NUM, ROW_NUMBER() OVER(PARTITION BY PRODUCT_ITEM_NUM ORDER BY FILE_NUM) AS F\r\n"
+			+ "FROM IMAGEFILE) I ON P.PAYMENT_PRODUCT_NUM = I.PRODUCT_ITEM_NUM AND I.F=1\r\n"
 			+ "WHERE PR.PRODUCT_SELLER_ID = ? AND R.RESERVATION_NUM = ?";
 
 	// 가장 마지막에 저장된 PK 번호 보여주기
@@ -137,7 +140,7 @@ public class ReservationDAO2 {
 		// 컨디션이 'RESERVATION_OWNER_SELECTALL'이라면, 사장님 아이디를 담아서 쿼리문을 수행한다.
 		else if (reservationDTO.getReservation_condition().equals("RESERVATION_OWNER_SELECTALL")) {
 			Object[] args = { reservationDTO.getReservation_seller_id() }; // 사장님 ID
-			datas = jdbcTemplate.query(RESERVATION_OWNER_SELECTALL, args,new ReservationRowMapper_all());
+			datas = jdbcTemplate.query(RESERVATION_OWNER_SELECTALL, args,new ReservationRowMapper_owner_all());
 		}
 		// 해당하는 컨디션이 없다면,
 		else {
@@ -211,6 +214,28 @@ class ReservationRowMapper_all implements RowMapper<ReservationDTO> {
 		return data;
 	}
 }
+// 예약 정보를 반환하는 RowMapper
+class ReservationRowMapper_owner_all implements RowMapper<ReservationDTO> {
+	@Override
+	public ReservationDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		System.out.println("====model.ReservationRowMapper_all 시작");
+		
+		ReservationDTO data = new ReservationDTO();
+		data.setReservation_num(rs.getInt("RESERVATION_NUM")); // 예약 번호
+		java.sql.Date sqlDate = rs.getDate("RESERVATION_REGISTRATION_DATE"); // DB에 저장된 예약일
+		data.setReservation_registration_date(new Date(sqlDate.getTime())); // 예약일 (상품 이용일)
+		data.setReservation_status(rs.getString("RESERVATION_STATUS")); // 예약 상태 (예약 완료, 예약 취소)
+		data.setReservation_product_num(rs.getInt("PRODUCT_NUM")); // 예약 상품 번호
+		data.setReservation_product_name(rs.getString("PRODUCT_NAME")); // 예약 상품명
+		data.setReservation_price(rs.getInt("PAYMENT_PRICE")); // 예약(결제) 금액
+		data.setReservation_member_id(rs.getString("MEMBER_ID")); // 회원 아이디
+		data.setReservation_member_name(rs.getString("MEMBER_NAME")); // 회원 이름
+		data.setReservation_member_phone(rs.getString("MEMBER_PHONE")); // 회원 전화번호
+		
+		System.out.println("model.ReservationRowMapper_all 종료");
+		return data;
+	}
+}
  
 // 예약 상세 정보를 반환하는 RowMapper
 class ReservationRowMapper_one implements RowMapper<ReservationDTO> {
@@ -256,7 +281,7 @@ class ReservationRowMapper_one_owner implements RowMapper<ReservationDTO> {
 		data.setReservation_member_id(rs.getString("MEMBER_ID")); // 결제자 ID
 		data.setReservation_member_name(rs.getString("MEMBER_NAME")); // 예약자 성명
 		data.setReservation_member_phone(rs.getString("MEMBER_PHONE")); // 예약자 핸드폰 번호
-		
+		data.setReservation_product_file_dir(rs.getString("FILE_DIR"));	// 상품 이미지
 		System.out.println("model.ReservationRowMapper_one_owner 종료");
 		return data;
 	}

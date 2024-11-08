@@ -18,12 +18,12 @@
 	<delete id="delete">
 		DELETE FROM IMAGEFILE WHERE FILE_NUM = #{file_num}
 	</delete>
-	<select id="selectAll_BOARD" resultType="iamgeFile">
+	<select id="selectAll_BOARD" resultType="imageFile">
 		SELECT FILE_NUM, FILE_DIR FROM IMAGEFILE WHERE
 		BOARD_ITEM_NUM = #{file_board_num}
 		ORDER BY FILE_NUM
 	</select>
-	<select id="selectAll_PRODUCT" resultType="iamgeFile">
+	<select id="selectAll_PRODUCT" resultType="imageFile">
 		SELECT FILE_NUM, FILE_DIR FROM IMAGEFILE WHERE
 		PRODUCT_ITEM_NUM = #{file_product_num}
 		ORDER BY FILE_NUM

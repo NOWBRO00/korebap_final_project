@@ -123,21 +123,7 @@
 
 </head>
 <body>
-	<!-- 샘플 데이터 설정 -->
-	<%
-	/*
-	List<Map<String, Object>> productList = new ArrayList<>();
 
-	for (int i = 1; i <= 7; i++) {
-		Map<String, Object> product = new HashMap<>();
-		product.put("product_name", "샘플 상품 " + i);
-		product.put("product_num", 100 + i);
-		productList.add(product);
-	}
-
-	request.setAttribute("productList", productList);
-	*/
-	%>
 	<!-- 헤더 섹션 -->
 	<c:import url="header.jsp"></c:import>
 

@@ -50,14 +50,14 @@ $(document).ready(function() {
 		        } else {
 		            bossList.forEach((boss) => {
 		                console.log("forEach 시작: ", boss);
-		                bossHTML += '<tr>' +
-		                    '<td><a href="mypage.do?member_id=' + boss.member_id + '">' + boss.member_id + '</a></td>' +
-		                    '<td>' + boss.member_name + '</td>' +
-		                    '<td>' + boss.member_phone + '</td>' +
-		                    '<td>' + boss.member_registration_date + '</td>' +
-		                    '<td>' +
-		                    '<div class="d-flex justify-content-between">' +
-		                    '<a href="MemberBan.do?member_id=' + boss.member_id + '" class="btn btn-primary" role="button">정지</a>' +
+		                bossHTML += '<tr style="text-align: center;">' +
+		                    '<td style="vertical-align: middle;"><a href="mypage.do?member_id=' + boss.member_id + '">' + boss.member_id + '</a></td>' +
+		                    '<td style="vertical-align: middle;">' + boss.member_name + '</td>' +
+		                    '<td style="vertical-align: middle;">' + boss.member_phone + '</td>' +
+		                    '<td style="vertical-align: middle;">' + boss.member_registration_date + '</td>' +
+		                    '<td style="vertical-align: middle;">' +
+		                    '<div>' +
+		                    '<a style="margin-right: 2rem;" href="MemberBan.do?member_id=' + boss.member_id + '" class="btn btn-primary" role="button">정지</a>' +
 		                    '<a href="deleteMember.do?member_id=' + boss.member_id + '" class="btn btn-primary" role="button">탈퇴</a>' +
 		                    '</div>' +
 		                    '</td>' +
