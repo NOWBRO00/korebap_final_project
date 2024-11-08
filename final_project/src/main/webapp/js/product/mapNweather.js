@@ -63,7 +63,7 @@ $(document).ready(function(){
 	    
 	  //날씨 api를 통해 날씨에 관련된 정보들을 받아온다. 
     function getWeather(lat, lon) {
-    	const API_KEY = "ffd7a00bf82dc39075ee0b14f3d23d7d";
+    	const API_KEY = "API_KEY";
     	const url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+API_KEY+"&units=metric&lang=kr";
         fetch(url).then(function(response) {
 			console.log(response);
