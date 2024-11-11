@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.korebap.app.biz.payment.PaymentDTO;
 import com.korebap.app.biz.payment.PaymentInfo;
 import com.korebap.app.biz.payment.PaymentService;
+import com.korebap.app.biz.product.ProductDTO;
+import com.korebap.app.biz.product.ProductService;
 import com.korebap.app.view.payment.PaymentUtil;
 
 @RestController
@@ -22,25 +24,36 @@ public class PaymentAsyncController {
 	
     @Autowired
     private PaymentService paymentService; // 결제 서비스 자동 주입
+    @Autowired
+    private ProductService productService;
 	
 	// 결제 준비 요청 처리
 	@RequestMapping(value="/payment/prepare.do", method=RequestMethod.POST)
-    public @ResponseBody String preparePayment(@RequestBody PaymentInfo paymentInfo) {
+    public @ResponseBody String preparePayment(@RequestBody PaymentInfo paymentInfo, ProductDTO productDTO) {
 		System.out.println("---------------비동기 처리(preparePayment) 시작---------------");
 		
 		// 요청으로부터 상점 고유번호와 결제 금액을 가져옴
 		String merchant_uid = paymentInfo.getMerchant_uid(); // 상점 고유번호
-		int amount = paymentInfo.getAmount(); // 결제 금액
+		//int amount = paymentInfo.getAmount(); // 결제 금액
         System.out.println("merchant_uid : [ " + merchant_uid +" ]");
-        System.out.println("amount : [ " + amount + " ]");
-
+        //System.out.println("amount : [ " + amount + " ]");
+        System.out.println("product_num : [ "+paymentInfo.getProduct_num()+" ]");
+        //System.out.println("product_num : [ "+productDTO.getProduct_num()+" ]");
+        
+        productDTO.setProduct_condition("SELECT_BY_PRODUCTNUM");
+        productDTO.setProduct_num(paymentInfo.getProduct_num());
+        productDTO = productService.selectOne(productDTO);
+        //System.out.println("서비스밑에"+productDTO.getProduct_price());
+        //int price = productDTO.getProduct_price();
+        //System.out.println("서비스 밑밑에"+price);
         // 포트원 API를 통해 결제 토큰 발행
         paymentInfo = PaymentUtil.portOne_code();
         System.out.println("portone token(포트원 토큰) : [ " + paymentInfo.getToken() + " ]");
 
         // 요청 받은 상점 고유번호와 결제 금액을 PaymentInfo 객체에 설정
         paymentInfo.setMerchant_uid(merchant_uid);
-        paymentInfo.setAmount(amount);
+        paymentInfo.setAmount(productDTO.getProduct_price());
+        //System.out.println(paymentInfo.getAmount());
 
         // 결제 준비 요청 처리
         boolean flag = PaymentUtil.prepare(paymentInfo); // 결제 준비 요청 성공 여부

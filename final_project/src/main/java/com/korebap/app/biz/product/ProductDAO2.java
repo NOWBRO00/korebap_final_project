@@ -108,6 +108,8 @@ public class ProductDAO2 {
    // 상품 전체 개수
    private final String PRODUCT_SELECTALL_TOTAL_CNT = "SELECT PRODUCT_CATEGORY, COUNT(PRODUCT_NUM) AS PRODUCT_TOTAL_CNT "
          + "FROM PRODUCT " + "GROUP BY PRODUCT_CATEGORY";
+   // 상품 가격
+   private final String SELECT_BY_PRODUCTNUM ="SELECT PRODUCT_PRICE FROM PRODUCT WHERE PRODUCT_NUM = ?";
    // 11.05 취합
    // 상품 총 개수
    private final String PRODUCT_TOTAL_COUNT = "SELECT COUNT(PRODUCT_NUM) AS PRODUCT_TOTAL_COUNT FROM PRODUCT";
@@ -292,7 +294,14 @@ public class ProductDAO2 {
             Object[] args = { seller_id };
             data = jdbcTemplate.queryForObject(PRODUCT_SELECTONE_OWNER_TOTAL_PAGE, args, new ProductRowMapper_one_page_count());
          }
+         // 결제 금액 사전 등록 시 필요한 상품 가격 반환
+         else if(productDTO.getProduct_condition().equals("SELECT_BY_PRODUCTNUM")) {
+        	 System.out.println("model.productDAO.selectOne 상품가격 불러오기 시작");
+             Object[] args = {productDTO.getProduct_num()};
+             data = jdbcTemplate.queryForObject(SELECT_BY_PRODUCTNUM, args, new  ProductRowMapper_by_productNum());
+         }
          //11.05 취합
+         // 컨디션이 'PRODUCT_TOTAL_COUNT_VV' 라면 - 상품 전체 카운트
          else if(productDTO.getProduct_condition().equals("PRODUCT_TOTAL_COUNT_VV")) {
             data = jdbcTemplate.queryForObject(PRODUCT_TOTAL_COUNT, new ProductRowMapper_total_cnt());
          }
@@ -636,6 +645,7 @@ class ProductRowMapper_one_product_cnt implements RowMapper<ProductDTO> {
       return data;
    }
 }
+// 상품 전체 번호 반환하는 RowMapper
 class ProductRowMapper_total_cnt implements RowMapper<ProductDTO>{
 
    @Override
@@ -647,3 +657,18 @@ class ProductRowMapper_total_cnt implements RowMapper<ProductDTO>{
       return data;
    }
 }
+// 상품 가격 반환하는 RowMapper
+class ProductRowMapper_by_productNum implements RowMapper<ProductDTO> {
+    // 사용자가 선택한 일자의 재고 보기
+    @Override
+    public ProductDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+       System.out.println("model.ProductDAO.ProductRowMapper_by_productNum 실행");
+
+       ProductDTO data = new ProductDTO();
+       data.setProduct_price(rs.getInt("PRODUCT_PRICE")); // 상품 번호
+
+       System.out.println("model.ProductDAO.ProductRowMapper_by_productNum 반환");
+
+       return data;
+    }
+ }
