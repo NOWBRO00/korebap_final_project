@@ -1,6 +1,5 @@
 package com.korebap.app.view.product;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import com.korebap.app.biz.review.ReviewDTO;
 import com.korebap.app.biz.review.ReviewService;
 import com.korebap.app.biz.wishlist.WishlistDTO;
 
-
 @Controller
 public class ProductDetailController {
 
@@ -29,12 +27,13 @@ public class ProductDetailController {
    @Autowired
    private ImageFileService fileService;
 
-   @GetMapping(value="/productDetail.do")
-   public String productDetail(Model model,ProductDTO productDTO, 
-         ReviewDTO reviewDTO,ImageFileDTO fileDTO, WishlistDTO wishlistDTO) {
+   @GetMapping(value = "/productDetail.do")
+   public String productDetail(Model model, ProductDTO productDTO, ReviewDTO reviewDTO, ImageFileDTO fileDTO,
+         WishlistDTO wishlistDTO) {
 
       // [ 상품 상세보기 ]
-      System.out.println("************************************************************[com.korebap.app.view.product productDetail 시작]************************************************************");
+      System.out.println(
+            "************************************************************[com.korebap.app.view.product productDetail 시작]************************************************************");
 
       // 경로를 담을 변수 설정
       String viewName;
@@ -43,8 +42,7 @@ public class ProductDetailController {
       int product_num = productDTO.getProduct_num();
 
       // 데이터 로그
-      System.out.println("*****com.korebap.app.view.product product_num ["+product_num+"]*****");
-
+      System.out.println("*****com.korebap.app.view.product product_num [" + product_num + "]*****");
 
       // [상품] 반환
       productDTO.setProduct_condition("PRODUCT_BY_INFO");
@@ -53,12 +51,14 @@ public class ProductDetailController {
       // 주소 정보 분리
       String[] totalAddress = productDTO.getProduct_address().split("_");
 
-      //productDTO.setProduct_postcode(totalAddress[0]); // 우편번호
-      String address = totalAddress[1]; // 기본 주소
-      String extraAddress = totalAddress[2]; // 추가 주소
-      //productDTO.setProduct_detailAddress(totalAddress[3]); // 상세 주소
+      if (totalAddress.length > 1) {
 
-      productDTO.setProduct_address(address + extraAddress);
+         // productDTO.setProduct_postcode(totalAddress[0]); // 우편번호
+         String address = totalAddress[1]; // 기본 주소
+         String extraAddress = totalAddress[2]; // 추가 주소
+         // productDTO.setProduct_detailAddress(totalAddress[3]); // 상세 주소
+         productDTO.setProduct_address(address + extraAddress);
+      }
 
       // [파일 리스트] 반환
       fileDTO.setFile_product_num(product_num);
@@ -67,12 +67,11 @@ public class ProductDetailController {
 
       // [리뷰 리스트] 반환
       reviewDTO.setReview_product_num(product_num);
-      System.out.println("reviewDTO 확인 : "+reviewDTO+"]");
+      System.out.println("reviewDTO 확인 : " + reviewDTO + "]");
       List<ReviewDTO> reviewList = reviewService.selectAll(reviewDTO);
 
-
       // 만약 productDTO 객체가 있다면
-      if(productDTO != null) {
+      if (productDTO != null) {
          System.out.println("*****com.korebap.app.view.product productDetail 상품 상세 있음 *****");
 
          model.addAttribute("product", productDTO);
@@ -80,8 +79,7 @@ public class ProductDetailController {
          model.addAttribute("reviewList", reviewList);
 
          viewName = "productDetail";
-      }
-      else {
+      } else {
          System.out.println("*****com.korebap.app.view.product productDetail 상품 상세 없음 *****");
 
          model.addAttribute("msg", "상품을 찾을 수 없습니다. 다시 시도해 주세요.");
@@ -90,9 +88,10 @@ public class ProductDetailController {
          viewName = "info";
 
       }
-      System.out.println("*****com.korebap.app.view.product productDetail viewName ["+ viewName +"]*****");
+      System.out.println("*****com.korebap.app.view.product productDetail viewName [" + viewName + "]*****");
 
-      System.out.println("************************************************************[com.korebap.app.view.product productDetail 종료]************************************************************");
+      System.out.println(
+            "************************************************************[com.korebap.app.view.product productDetail 종료]************************************************************");
 
       return viewName;
    }
